@@ -22,11 +22,12 @@ public class DBHandler {
 
     }
 
-    public long insert(String name, int count, String shelf_life) {
+    public long insert(String name, int count, String shelf_life, String icon) {
         ContentValues values = new ContentValues();
         values.put("name", name);
         values.put("count", count);
         values.put("shelf_life", shelf_life);
+        values.put("icon", icon);
         return DBHelper.getInstance(mContext).insert("tb_food", values);
     }
 
@@ -45,6 +46,7 @@ public class DBHandler {
             vo.setName(cursor.getString(1));
             vo.setCount(cursor.getInt(2));
             vo.setShelf_life(cursor.getString(3));
+            vo.setIcon(cursor.getString(4));
             data.add(vo);
         }
         return data;

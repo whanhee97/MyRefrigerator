@@ -23,7 +23,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "name TEXT NOT NULL, " +
                 "count INTEGER NOT NULL, " +
-                "shelf_life TEXT)";
+                "shelf_life TEXT, " +
+                "icon TEXT)";
         db.execSQL(sql);
     }
     // 버전이 업데이트되면 DB 다시 만듬

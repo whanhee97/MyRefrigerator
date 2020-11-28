@@ -5,6 +5,15 @@ public class Food {
     private String name;
     private int count;
     private String shelf_life;
+    private String icon;
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
     public int getId() {
         return id;
