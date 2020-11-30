@@ -6,130 +6,108 @@
     android:layout_height="match_parent"
     tools:context=".SelectIcon">
 
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_marginBottom="12dp"
-        android:src="@drawable/fruit"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="345dp"
+        android:layout_height="541dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/btn_select"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.311"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.041" />
+        app:layout_constraintVertical_bias="0.129">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_marginBottom="9dp"
-        android:src="@drawable/vegetable"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.311"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.183" />
+        <LinearLayout
+            android:layout_width="163dp"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:src="@drawable/meat"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.311"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.321" />
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="12dp"
+                android:src="@drawable/fruit" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:src="@drawable/drink"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.311"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.602" />
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="9dp"
+                android:src="@drawable/vegetable" />
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:src="@drawable/food"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.311"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.742" />
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/meat" />
 
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:src="@drawable/seafood"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.311"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.461" />
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/seafood" />
 
-    <RadioGroup
-        android:id="@+id/rg_icon"
-        android:layout_width="160dp"
-        android:layout_height="523dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.848"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.331">
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/drink" />
 
-        <RadioButton
-            android:id="@+id/radioButton1"
-            android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:text="과일" />
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/food" />
 
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="match_parent"
-            android:layout_height="73dp"
-            android:text="채소" />
+        </LinearLayout>
 
-        <RadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginBottom="39dp"
-            android:text="육류" />
+        <RadioGroup
+            android:id="@+id/rg_icon"
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/radioButton4"
-            android:layout_width="127dp"
-            android:layout_height="wrap_content"
-            android:text="생선" />
+            <RadioButton
+                android:id="@+id/radioButton1"
+                android:layout_width="match_parent"
+                android:layout_height="87dp"
+                android:text="과일" />
 
-        <RadioButton
-            android:id="@+id/radioButton5"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:text="음료" />
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="match_parent"
+                android:layout_height="89dp"
+                android:text="채소" />
 
-        <RadioButton
-            android:id="@+id/radioButton6"
-            android:layout_width="121dp"
-            android:layout_height="47dp"
-            android:text="기타" />
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="match_parent"
+                android:layout_height="77dp"
+                android:layout_marginBottom="39dp"
+                android:text="육류" />
+
+            <RadioButton
+                android:id="@+id/radioButton4"
+                android:layout_width="127dp"
+                android:layout_height="wrap_content"
+                android:text="생선" />
+
+            <RadioButton
+                android:id="@+id/radioButton5"
+                android:layout_width="match_parent"
+                android:layout_height="115dp"
+                android:text="음료" />
+
+            <RadioButton
+                android:id="@+id/radioButton6"
+                android:layout_width="121dp"
+                android:layout_height="47dp"
+                android:text="기타" />
+        </RadioGroup>
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/btn_select"
@@ -139,10 +117,10 @@
         android:text="선택"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.909" />
+        app:layout_constraintVertical_bias="0.953" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -57,4 +57,8 @@ public class DBHelper extends SQLiteOpenHelper {
         return sqLiteDatabase.delete(table,whereClause,whereArgs);
     }
 
+    public int update(String table, ContentValues values, String whereClause, String[] whereArgs){
+        return sqLiteDatabase.update(table,values,whereClause,whereArgs);
+    }
+
 }

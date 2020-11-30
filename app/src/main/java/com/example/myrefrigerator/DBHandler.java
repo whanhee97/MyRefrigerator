@@ -53,9 +53,17 @@ public class DBHandler {
     }
 
     public long removeItem(int id) {
-        String whereClause = "_id" + "=?";
+        String whereClause = "id" + "=?";
         String[] whereArgs = new String[]{Integer.toString(id)};
         return DBHelper.getInstance(mContext).delete("tb_food", whereClause, whereArgs);
+    }
+
+    public int updateCount(int id, int value){
+        String whereClause = "id" + "=?";
+        String[] whereArgs = new String[]{Integer.toString(id)};
+        ContentValues values = new ContentValues();
+        values.put("count",value);
+        return DBHelper.getInstance(mContext).update("tb_food",values,whereClause,whereArgs);
     }
 
     public void close() {

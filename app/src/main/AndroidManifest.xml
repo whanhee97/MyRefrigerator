@@ -9,8 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SelectIcon"></activity>
-        <activity android:name=".AddFoodActivity" />
+        <activity android:name=".ChangeCount"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".FoodClicked"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".SelectIcon"
+            android:parentActivityName=".AddFoodActivity" />
+        <activity
+            android:name=".AddFoodActivity"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

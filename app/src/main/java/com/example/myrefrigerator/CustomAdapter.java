@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -39,7 +41,7 @@ public class CustomAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View view = mLayoutInflater.inflate(R.layout.food_list_layout,null);
         String icon = foodList.get(position).getIcon();
         if(icon == null){
@@ -74,7 +76,7 @@ public class CustomAdapter extends BaseAdapter {
         String count = Integer.toString(foodList.get(position).getCount());
         foodCount.setText("수량: " + count);
         foodShelfLife.setText("유통기한: " + foodList.get(position).getShelf_life());
-
+//
         return view;
     }
 }
