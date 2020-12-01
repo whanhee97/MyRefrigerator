@@ -87,8 +87,11 @@ public class CustomAdapter extends BaseAdapter {
         if(leftdays <= 0){ // 날짜가 0일 이하면 빨간색으로 세팅
             foodShelfLife.setTextColor(Color.parseColor("#ff0000"));
         }
-        else{ // 유통기한 안지났으면 검은색
-            foodShelfLife.setTextColor(Color.parseColor("#000000"));
+        else if(leftdays <= 3 && leftdays > 0){ // 유통기한 3일 이하면 주황색
+            foodShelfLife.setTextColor(Color.parseColor("#ff8000"));
+        }
+        else{ //아니면 초록색
+            foodShelfLife.setTextColor(Color.parseColor("#009900"));
         }
         foodShelfLife.setText("유통기한: " + foodList.get(position).getShelf_life());
 //
