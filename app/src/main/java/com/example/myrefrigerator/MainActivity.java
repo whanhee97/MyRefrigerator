@@ -41,16 +41,19 @@ public class MainActivity extends AppCompatActivity {
         currentDate = LocalDate.now();
         LocalDate temp; // 유통기한을 String 에서 변환한 객체
         long leftdays = 0;
-        for(Food f : foodList){
-            temp = LocalDate.parse(f.getShelf_life());
-            leftdays = ChronoUnit.DAYS.between(currentDate,temp); // 오늘부터 유통기한까지 날짜차이 계산
-            if(leftdays <= 3){ // 날짜가 3일 이하면 리스트에 저장
-                foodList_left3days.add(f);
-            }
-            if(leftdays <= 0){ // 날짜가 0일 이하면 리스트에 저장
-                foodList_timeOver.add(f);
+        if(foodList != null){
+            for(Food f : foodList){
+                temp = LocalDate.parse(f.getShelf_life());
+                leftdays = ChronoUnit.DAYS.between(currentDate,temp); // 오늘부터 유통기한까지 날짜차이 계산
+                if(leftdays <= 3 && leftdays >0){ // 날짜가 3일 이하면 리스트에 저장
+                    foodList_left3days.add(f);
+                }
+                if(leftdays <= 0){ // 날짜가 0일 이하면 리스트에 저장
+                    foodList_timeOver.add(f);
+                }
             }
         }
+
 
         listView = (ListView)findViewById(R.id.listView);
 

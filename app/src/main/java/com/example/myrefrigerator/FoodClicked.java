@@ -1,10 +1,13 @@
 package com.example.myrefrigerator;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -69,19 +72,33 @@ public class FoodClicked extends AppCompatActivity {
     }
 
     public void mOnClick(View v){
-
+        Intent intent;
         switch (v.getId()){
             case R.id.btn_update:
-                Intent intent = new Intent(FoodClicked.this,ChangeCount.class);
+                intent = new Intent(FoodClicked.this,ChangeCount.class);
                 intent.putExtra("id",id);
                 intent.putExtra("count",count);
                 startActivity(intent);
                 break;
             case R.id.btn_delete:
-                Intent intent2 = new Intent(FoodClicked.this,MainActivity.class);
-                DBHandler handler = new DBHandler(this);
-                handler.removeItem(id);
-                startActivity(intent2);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                final DBHandler handler = new DBHandler(this);
+                builder.setTitle("경고");
+                builder.setMessage("삭제하면 복구 불가능 합니다. 삭제하시겠습니까?");
+                builder.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(FoodClicked.this,MainActivity.class);
+                        handler.removeItem(id);
+                        startActivity(intent);
+                    }
+                });
+                builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                builder.create().show();
                 break;
         }
     }
