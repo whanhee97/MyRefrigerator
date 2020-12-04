@@ -1,5 +1,6 @@
 package com.example.myrefrigerator;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +8,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -23,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Food> foodList;
     ArrayList<Food> foodList_timeOver; // 유통기한 지난 푸드리스트
     ArrayList<Food> foodList_left3days; // 유통기한 3일 이하 푸드리스트
-    DBHelper dbHelper;
     LocalDate currentDate;
     int viewCMD = 0;
 
@@ -45,18 +48,17 @@ public class MainActivity extends AppCompatActivity {
             for(Food f : foodList){
                 temp = LocalDate.parse(f.getShelf_life());
                 leftdays = ChronoUnit.DAYS.between(currentDate,temp); // 오늘부터 유통기한까지 날짜차이 계산
-                if(leftdays <= 3 && leftdays >0){ // 날짜가 3일 이하면 리스트에 저장
+                if(leftdays <= 3 && leftdays >= 0){ // 날짜가 3일 이하면 리스트에 저장
                     foodList_left3days.add(f);
                 }
-                if(leftdays <= 0){ // 날짜가 0일 이하면 리스트에 저장
+                if(leftdays < 0){ // 날짜가 0일 미만이면 리스트에 저장
                     foodList_timeOver.add(f);
                 }
             }
         }
 
-
         listView = (ListView)findViewById(R.id.listView);
-
+        listView.setItemsCanFocus(false);
     }
 
     @Override
@@ -111,6 +113,26 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.gotomemo:
+                Intent intent = new Intent(this,TodoActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public void mOnClick(View v){
         Intent intent;
         switch (v.getId()){
@@ -132,4 +154,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
+
+
 }

@@ -3,8 +3,6 @@ package com.example.myrefrigerator;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
-
 public class Food implements Parcelable {
     private int id;
     private String name;

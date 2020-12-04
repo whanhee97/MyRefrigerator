@@ -84,10 +84,10 @@ public class CustomAdapter extends BaseAdapter {
 
         temp = LocalDate.parse(foodList.get(position).getShelf_life());
         leftdays = ChronoUnit.DAYS.between(currentDate,temp); // 오늘부터 유통기한까지 날짜차이 계산
-        if(leftdays <= 0){ // 날짜가 0일 이하면 빨간색으로 세팅
+        if(leftdays < 0){ // 날짜가 0일 이하면 빨간색으로 세팅
             foodShelfLife.setTextColor(Color.parseColor("#ff0000"));
         }
-        else if(leftdays <= 3 && leftdays > 0){ // 유통기한 3일 이하면 주황색
+        else if(leftdays <= 3 && leftdays >= 0){ // 유통기한 3일 이하면 주황색
             foodShelfLife.setTextColor(Color.parseColor("#ff8000"));
         }
         else{ //아니면 초록색

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/gotomemo"
+        android:title="장보기 메모"
+        android:icon="@drawable/memo"
+        app:showAsAction="always"
+        />
+</menu>
