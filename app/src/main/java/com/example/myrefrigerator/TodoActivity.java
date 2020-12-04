@@ -1,6 +1,7 @@
 package com.example.myrefrigerator;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -32,6 +33,8 @@ public class TodoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("장보기 메모");
 
         todoDBHandler = new TodoDBHandler(this);
         memoList = todoDBHandler.getItems();
