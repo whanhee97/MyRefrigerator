@@ -13,9 +13,10 @@ import java.net.URL;
 
 public class HttpService extends Service {
     private static String LOG_TAG = "Http Service";
-    final StringBuilder output = new StringBuilder("Hello");
     String result = "";
+    String keyword = "";
     IBinder iBinder = new MyBinder();
+    Thread thread;
 
     class MyBinder extends Binder {
         HttpService getService(){
@@ -28,16 +29,10 @@ public class HttpService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
+        keyword = intent.getStringExtra("keyword");
+        Log.i(LOG_TAG, keyword);
         Log.i(LOG_TAG, "Http Service onBind...");
-        return iBinder;
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        String keyword = "apple";
-        String serverKey = "AIzaSyDPxNj4AxbQEcV1uuxi5oZz6thJ1wvsi8Y";
-
+        final String serverKey = "AIzaSyDPxNj4AxbQEcV1uuxi5oZz6thJ1wvsi8Y";
         final String requestUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" +
                 keyword +
                 "&key=" +
@@ -46,10 +41,9 @@ public class HttpService extends Service {
 
         Log.i(LOG_TAG, "Http Service onCreate...");
 
-        new Thread(new Runnable() {
+        thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                String serverKey = "AIzaSyDPxNj4AxbQEcV1uuxi5oZz6thJ1wvsi8Y";
                 BufferedReader reader = null;
 
                 try {
@@ -81,26 +75,37 @@ public class HttpService extends Service {
                 }
                 //stopSelf(); //태스크가 끝나면 서비스 종료
             }
-        }).start();
+        });
+        thread.start();
         Log.i(LOG_TAG, "Thread Start OK...===> " + result);
+
+        return iBinder;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
     }
 
 
     @Override
     public void onRebind(Intent intent) {
         super.onRebind(intent);
-        Log.i(LOG_TAG, "Http Service onRebind...");
+
     }
 
     @Override
     public boolean onUnbind(Intent intent) {
         Log.i(LOG_TAG, "Http Service onUnbind...");
+        thread.interrupt();
         return super.onUnbind(intent);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        thread.interrupt();
         Log.i(LOG_TAG, "Http Service onDestroy...");
     }
 

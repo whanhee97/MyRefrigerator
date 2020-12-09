@@ -10,8 +10,16 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,14 +31,18 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class RecommendListActivity extends AppCompatActivity {
     String name;
     ArrayList<SearchData> sdata;
+    ListView listView;
+
     private static String LOG_TAG = "RecommendActivity";
     boolean isBoundService = false;
+    Intent serviceIntent;
     HttpService mService;
     String keyword;
     String serverKey;
@@ -55,6 +67,8 @@ public class RecommendListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend_list);
+
+        listView = (ListView)findViewById(R.id.youtubelistview);
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
 
@@ -64,9 +78,16 @@ public class RecommendListActivity extends AppCompatActivity {
 
         Button recommend = (Button) findViewById(R.id.recommend);
 
-        Intent serviceIntent = new Intent(this, HttpService.class);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        serviceIntent = new Intent(this, HttpService.class);
+        serviceIntent.putExtra("keyword",keyword);
         startService(serviceIntent);
-        bindService(serviceIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
+        bindService(serviceIntent, mServiceConnection,0);
         isBoundService = true;
     }
 
@@ -103,8 +124,21 @@ public class RecommendListActivity extends AppCompatActivity {
 
                 Log.i(LOG_TAG,Integer.toString(sdata.size()));
 
+                YoutubeAdapter youtubeAdapter = new YoutubeAdapter(this,sdata);
+                if(sdata !=null) {
+                    listView.setAdapter(youtubeAdapter);
+                }
 
                 break;
+            case R.id.refresh:
+                if (isBoundService) {
+                    unbindService(mServiceConnection);
+                    isBoundService = false;
+                    Log.i(LOG_TAG, "Http Service Stop...");
+                }
+
+                break;
+
         }
     }
 
