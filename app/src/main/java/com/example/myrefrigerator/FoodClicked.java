@@ -7,11 +7,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class FoodClicked extends AppCompatActivity {
     private ImageView imageView;
@@ -24,11 +29,14 @@ public class FoodClicked extends AppCompatActivity {
     String name;
     int count;
     String shelf_life;
+    ArrayList<SearchData> sdata;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_clicked);
+
         Intent intent = getIntent();
         Food food = intent.getParcelableExtra("food");
 
@@ -99,6 +107,12 @@ public class FoodClicked extends AppCompatActivity {
                     }
                 });
                 builder.create().show();
+                break;
+
+            case R.id.btn_recommend:
+                intent = new Intent(getApplicationContext(),RecommendListActivity.class);
+                intent.putExtra("name",name);
+                startActivity(intent);
                 break;
         }
     }

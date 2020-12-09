@@ -1,0 +1,110 @@
+package com.example.myrefrigerator;
+
+import android.app.Service;
+import android.content.Intent;
+import android.os.Binder;
+import android.os.IBinder;
+import android.util.Log;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class HttpService extends Service {
+    private static String LOG_TAG = "Http Service";
+    final StringBuilder output = new StringBuilder("Hello");
+    String result = "";
+    IBinder iBinder = new MyBinder();
+
+    class MyBinder extends Binder {
+        HttpService getService(){
+            return HttpService.this;
+        }
+    }
+
+    public HttpService() {
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        Log.i(LOG_TAG, "Http Service onBind...");
+        return iBinder;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        String keyword = "apple";
+        String serverKey = "AIzaSyDPxNj4AxbQEcV1uuxi5oZz6thJ1wvsi8Y";
+
+        final String requestUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" +
+                keyword +
+                "&key=" +
+                serverKey +
+                "&maxResults=20";
+
+        Log.i(LOG_TAG, "Http Service onCreate...");
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String serverKey = "AIzaSyDPxNj4AxbQEcV1uuxi5oZz6thJ1wvsi8Y";
+                BufferedReader reader = null;
+
+                try {
+                    URL url = new URL(requestUrl);
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                    if (conn != null) {
+                        Log.i(LOG_TAG, "Thread run 메소드..." + conn.toString());
+                        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+                        conn.setRequestProperty("x-waple-authorization", serverKey);
+                        int resCode = conn.getResponseCode();
+                        Log.i(LOG_TAG, "Thread run 메소드...응답코드 :::: " + String.valueOf(resCode));
+                        if (resCode == HttpURLConnection.HTTP_OK) {
+                            Log.i(LOG_TAG, "Thread run 메소드 HTTP OK..." + conn.toString());
+                            InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");
+                            reader = new BufferedReader(tmp);
+                            StringBuffer buffer = new StringBuffer();
+                            String inputLine = null;
+                            while ((inputLine = reader.readLine()) != null) {
+                                buffer.append(inputLine);
+                            }
+                            result = buffer.toString();
+                            reader.close();
+                            conn.disconnect();
+                        }
+                    }
+                } catch(Exception ex) {
+                    Log.e("Http Service", "Exception in processing response.", ex);
+                    ex.printStackTrace();
+                }
+                //stopSelf(); //태스크가 끝나면 서비스 종료
+            }
+        }).start();
+        Log.i(LOG_TAG, "Thread Start OK...===> " + result);
+    }
+
+
+    @Override
+    public void onRebind(Intent intent) {
+        super.onRebind(intent);
+        Log.i(LOG_TAG, "Http Service onRebind...");
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        Log.i(LOG_TAG, "Http Service onUnbind...");
+        return super.onUnbind(intent);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i(LOG_TAG, "Http Service onDestroy...");
+    }
+
+    public String getResult() {
+        return result;
+    }
+}

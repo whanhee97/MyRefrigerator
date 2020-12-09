@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.myrefrigerator" >
+    package="com.example.myrefrigerator">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
 
     <application
         android:allowBackup="true"
@@ -8,8 +19,14 @@
         android:label="냉장고를 부탁해"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".IntroActivity" >
+        android:theme="@style/AppTheme">
+        <service
+            android:name=".HttpService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity android:name=".RecommendListActivity" />
+        <activity android:name=".IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,9 +46,7 @@
         <activity
             android:name=".AddFoodActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".MainActivity" >
-
-        </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
