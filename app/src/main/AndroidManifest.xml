@@ -25,7 +25,8 @@
             android:enabled="true"
             android:exported="true"></service>
 
-        <activity android:name=".RecommendListActivity" />
+        <activity android:name=".RecommendListActivity"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,5 +1,6 @@
 package com.example.myrefrigerator;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ComponentName;
@@ -67,6 +68,9 @@ public class RecommendListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend_list);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("추천 레시피");
 
         listView = (ListView)findViewById(R.id.youtubelistview);
         Intent intent = getIntent();

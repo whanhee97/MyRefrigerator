@@ -37,7 +37,7 @@ public class HttpService extends Service {
                 keyword +
                 "&key=" +
                 serverKey +
-                "&maxResults=20";
+                "&maxResults=30";
 
         Log.i(LOG_TAG, "Http Service onCreate...");
 
