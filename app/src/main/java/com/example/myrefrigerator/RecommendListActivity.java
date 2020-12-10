@@ -157,20 +157,21 @@ public class RecommendListActivity extends AppCompatActivity {
             }
 
             String title = c.getJSONObject("snippet").getString("title"); //유튜브 제목을 받아옵니다
-            String changString = "";
-            try {
-                changString = new String(title.getBytes("8859_1"), "utf-8"); //한글이 깨져서 인코딩 해주었습니다
-            } catch (UnsupportedEncodingException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
+            //Log.i("title>>>>>>>>>>>>>>>",title);
+//            String changString = "";
+//            try {
+//                changString = new String(title.getBytes("8859_1"), "utf-8"); //한글이 깨져서 인코딩 해주었습니다
+//            } catch (UnsupportedEncodingException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
+            //Log.i("title>>>>>>>>>>>>>>>",changString);
             String date = c.getJSONObject("snippet").getString("publishedAt") //등록날짜
                     .substring(0, 10);
             String imgUrl = c.getJSONObject("snippet").getJSONObject("thumbnails")
                     .getJSONObject("default").getString("url");  //썸내일 이미지 URL값
 
-            sdata.add(new SearchData(vodid, changString, imgUrl, date));
+            sdata.add(new SearchData(vodid, title, imgUrl, date));
         }
 
     }

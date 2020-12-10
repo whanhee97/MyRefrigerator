@@ -1,6 +1,7 @@
 package com.example.myrefrigerator;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +69,7 @@ public class YoutubeAdapter extends BaseAdapter {
 
         Glide.with(context).load(new_url).into(thumbnail);
         textView_date.setText(searchData.getPublishedAt());
+        //Log.i("title",searchData.getTitle());
         textView_title.setText(searchData.getTitle());
 
         return convertView;
