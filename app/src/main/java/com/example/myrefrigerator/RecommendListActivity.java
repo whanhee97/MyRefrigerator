@@ -107,6 +107,7 @@ public class RecommendListActivity extends AppCompatActivity {
             unbindService(mServiceConnection);
             isBoundService = false;
         }
+        Log.i(LOG_TAG,"액티비티 소멸!!");
     }
 
     public void mOnClick(View v) {
@@ -130,15 +131,6 @@ public class RecommendListActivity extends AppCompatActivity {
                 }
 
                 break;
-            case R.id.refresh:
-                if (isBoundService) {
-                    unbindService(mServiceConnection);
-                    isBoundService = false;
-                    Log.i(LOG_TAG, "Http Service Stop...");
-                }
-
-                break;
-
         }
     }
 

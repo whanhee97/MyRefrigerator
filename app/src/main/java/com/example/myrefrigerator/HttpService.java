@@ -16,7 +16,7 @@ public class HttpService extends Service {
     String result = "";
     String keyword = "";
     IBinder iBinder = new MyBinder();
-    Thread thread;
+    Thread thread = null;
 
     class MyBinder extends Binder {
         HttpService getService(){
@@ -30,7 +30,7 @@ public class HttpService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         keyword = intent.getStringExtra("keyword");
-        Log.i(LOG_TAG, keyword);
+        Log.i(LOG_TAG, "keyword : "+keyword);
         Log.i(LOG_TAG, "Http Service onBind...");
         final String serverKey = "AIzaSyDPxNj4AxbQEcV1uuxi5oZz6thJ1wvsi8Y";
         final String requestUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" +
@@ -85,27 +85,28 @@ public class HttpService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-
     }
 
 
     @Override
     public void onRebind(Intent intent) {
         super.onRebind(intent);
-
+        Log.i(LOG_TAG, "리바운드!!");
     }
 
     @Override
     public boolean onUnbind(Intent intent) {
         Log.i(LOG_TAG, "Http Service onUnbind...");
-        thread.interrupt();
+        stopSelf();
         return super.onUnbind(intent);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        thread.interrupt();
+        if(thread != null){
+            thread.interrupt();
+        }
         Log.i(LOG_TAG, "Http Service onDestroy...");
     }
 
