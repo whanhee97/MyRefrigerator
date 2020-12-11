@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -133,6 +134,17 @@ public class RecommendListActivity extends AppCompatActivity {
                 if(sdata !=null) {
                     listView.setAdapter(youtubeAdapter);
                 }
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        SearchData temp = sdata.get(position);
+                        String videoId = temp.getVideoId();
+                        Intent intent = new Intent(getApplicationContext(),YoutubeActivity.class);
+                        intent.putExtra("videoId",videoId);
+                        intent.putExtra("serverKey",serverKey);
+                        startActivity(intent);
+                    }
+                });
 
                 break;
         }
