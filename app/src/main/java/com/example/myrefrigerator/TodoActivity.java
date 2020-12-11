@@ -28,6 +28,7 @@ public class TodoActivity extends AppCompatActivity {
     ArrayList<TodoItem> memoList;
     TodoAdapter todoAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,5 +140,21 @@ public class TodoActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        exitApp();
+
+    }
+
+    private void exitApp(){
+        Intent i = new Intent(this, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.putExtra("EXIT_ROOT",true);
+        startActivity(i);
+    }
+
+
 
 }

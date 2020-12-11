@@ -35,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        if (getIntent().getBooleanExtra("EXIT_ROOT", false)) {
+            this.finishAndRemoveTask();
+            System.exit(0);
+        }
+
+
         dbHandler = new DBHandler(this);
         foodList = dbHandler.getItems();
 
